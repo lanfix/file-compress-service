@@ -1,0 +1,25 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: #222;
+}
+
+.main-wrapper {
+    background: #2B2B2B;
+    width: 100vw;
+    height: 100vh;
+    padding: 10px;
+}
+.terminal-line,
+.terminal-line *,
+.terminal-cursor {
+    color: #bfc2c6;
+    font: 400 15px monospace;
+    user-select: none;
+}
+.terminal-line {
+    display: block;
+    min-height: 18px;
+    width: 100%;
+}

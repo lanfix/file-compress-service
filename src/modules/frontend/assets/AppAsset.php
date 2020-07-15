@@ -16,6 +16,7 @@ class AppAsset extends AssetBundle
     ];
 
     public $js = [
+        'https://cdn.jsdelivr.net/jquery.typeit/4.4.0/typeit.min.js',
         '/js/master.js',
     ];
 
