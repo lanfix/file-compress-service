@@ -1,0 +1,22 @@
+{
+    "type": "project",
+    "require": {
+        "php": ">=7.4.0",
+        "ext-json": "*",
+        "ext-intl": "*",
+        "ext-mbstring": "*",
+        "yiisoft/yii2": "~2.0.24",
+        "yiisoft/yii2-bootstrap": "*",
+        "yiisoft/yii2-swiftmailer": "~2.0.7"
+    },
+    "require-dev": {
+        "yiisoft/yii2-debug": "~2.0.14",
+        "yiisoft/yii2-gii": "~2.0.8"
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
+        }
+    ]
+}
