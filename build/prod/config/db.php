@@ -7,6 +7,6 @@ return [
     /** Тут host=percona - это контейнер с percona */
     'dsn' => 'mysql:host=percona;dbname=project;',
     'username' => 'root',
-    'password' => '6a7da8638a4d17326de1405a62ea',
+    'password' => '888c779f6907bc3bee3bbdc11010',
     'charset' => 'utf8mb4'
 ];

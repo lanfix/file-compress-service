@@ -16,28 +16,27 @@ $config = [
     ],
     'components' => [
         'request' => [
-            'cookieValidationKey' => 'UCFC1Ja961LaP0N2s90Qt1M5zQrRcqOL1d',
+            'cookieValidationKey' => '90a5e3620018765f8250643dc2a834c8f',
         ],
         'cache' => [
             'class' => yii\caching\FileCache::class,
         ],
         'errorHandler' => [
-            'errorAction' => 'site/error',
+            'errorAction' => 'frontend/site/error',
         ],
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-                '/|welcome' => 'frontend/site/welcome',
-                '<controller>' => 'frontend/<controller>/index',
-                '<controller>/<action>' => 'frontend/<controller>/<action>',
+                '' => 'frontend/site/welcome',
+                'demo.php' => 'frontend/site/welcome',
+                'generator.php' => 'frontend/site/get-file-link',
             ],
         ],
         'user' => [
             'enableAutoLogin' => false,
         ],
         'db' => (require __DIR__ . '/db.php'),
-
     ],
     'params' => []
 ];

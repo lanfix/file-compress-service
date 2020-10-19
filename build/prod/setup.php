@@ -1,50 +1,35 @@
 <?php
-/**
- * Скрипт сборки проекта
- */
 
-function makeRightSlashes($path)
-{
-    return str_replace(['/', '\\'], DIRECTORY_SEPARATOR, $path);
-}
+require __DIR__ . '/../Builder.php';
 
 /**
  * Копирование конфигов из ./config в соответствующую
  * директорию в проекте. Одним словом - МИГРАЦИЯ_КОНФИГУРАЦИИ
  */
-echo "\e[32m>>> \e[36mstart copying configuration files...\e[37m ";
-$configureDir = makeRightSlashes(__DIR__ . '/config');
-$copyTo = makeRightSlashes(__DIR__ . '/../../src/config');
-if($openConfigureDir = opendir($configureDir)) {
-    while(false !== ($file = readdir($openConfigureDir))) {
-        if($file == "." || $file == "..") continue;
-        $fullFilePath = $configureDir . DIRECTORY_SEPARATOR . $file;
-        $finalFilePath = $copyTo . DIRECTORY_SEPARATOR . $file;
-        @copy($fullFilePath, $finalFilePath);
-    }
-}
-echo "\e[32mOK!\e[37m\n";
+Builder::copyFilesFromDirToDir(
+    __DIR__ . '/config',
+    __DIR__ . '/../../src/config',
+    'start copying configuration files'
+);
 
-echo "\e[32m>>> \e[36mstart copying public files...\e[37m ";
-$configureDir = makeRightSlashes(__DIR__ . '/public');
-$copyTo = makeRightSlashes(__DIR__ . '/../../src/public');
-if($openConfigureDir = opendir($configureDir)) {
-    while(false !== ($file = readdir($openConfigureDir))) {
-        if($file == "." || $file == "..") continue;
-        $fullFilePath = $configureDir . DIRECTORY_SEPARATOR . $file;
-        $finalFilePath = $copyTo . DIRECTORY_SEPARATOR . $file;
-        @copy($fullFilePath, $finalFilePath);
-    }
-}
-echo "\e[32mOK!\e[37m\n";
+/**
+ * Копирование публичных файлов
+ */
+Builder::copyFilesFromDirToDir(
+    __DIR__ . '/public',
+    __DIR__ . '/../../src/public',
+    'start copying public files'
+);
 
-echo "\e[32m>>> \e[36mcreating directory for assets...\e[37m ";
-@mkdir(makeRightSlashes(__DIR__ . '/../../src/public/assets'), 0775, true);
-echo "\e[32mOK!\e[37m\n";
+/**
+ * Создание нужных директорий
+ */
+Builder::createDirectoryIfNotExists(__DIR__ . '/../../src/public/assets');
+Builder::createDirectoryIfNotExists(__DIR__ . '/../../src/runtime');
+Builder::createDirectoryIfNotExists(__DIR__ . '/../../src/public/gallery');
+Builder::createDirectoryIfNotExists(__DIR__ . '/../../src/public/cache');
 
 /**
  * Копирование файла .env
  */
-echo "\e[32m>>> \e[36mcopying env file...\e[37m ";
-copy(__DIR__ . '/.env.dist', __DIR__ . '/.env');
-echo "\e[32mOK!\e[37m\n";
+Builder::copyFile(__DIR__ . '/.env.dist', __DIR__ . '/.env');

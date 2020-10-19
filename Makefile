@@ -1,21 +1,23 @@
 ifeq ($(STAGE),)
-STAGE = dev
+STAGE = prod
 endif
 
 OPT =
 .PHONY: build clean
 
-COMPOSE = docker-compose -p project \
+COMPOSE = docker-compose -p compressor \
 	-f ./build/${STAGE}/docker-compose.yml \
-	--project-directory ./build/${STAGE} \
-	--compatibility
+	--project-directory ./build/${STAGE}
 
-RUN_IN_PHP = docker exec -i project-php-fpm
-RUN_IN_PERCONA = docker exec -i project-percona
-RUN_IN_NGINX = docker exec -i project-nginx
+RUN_IN_PHP = docker exec -i compressor_php-fpm_1
+RUN_IN_PERCONA = docker exec -i compressor_percona_1
+RUN_IN_NGINX = docker exec -i compressor_nginx_1
 
 up:
 	${COMPOSE} up -d --build
+
+setup:
+	php ./build/${STAGE}/setup.php
 
 build:
 	make composer
